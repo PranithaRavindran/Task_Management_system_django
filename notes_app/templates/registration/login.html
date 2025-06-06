@@ -1,0 +1,26 @@
+{% extends 'notes_app/base.html' %}
+{% block content %}
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+<p>Don't have an account? <a href="{% url'register' %}">Register</a></p>
+{% endblock %}
+{% extends 'notes_app/base.html' %}
+{% load static %}
+<script src="{% static 'notes_app/js/script.js' %}"></script>
+
+<link rel="stylesheet" href="{% static 'notes_app/css/styles.css' %}">
+
+
+{% block content %}
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+<p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+{% endblock %}

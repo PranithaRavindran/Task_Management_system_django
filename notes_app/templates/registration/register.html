@@ -1,0 +1,73 @@
+{% extends 'notes_app/base.html' %}
+{% load static %}
+<script src="{% static 'notes_app/js/script.js' %}"></script>
+<link rel="stylesheet" href="{% static 'notes_app/css/styles.css' %}">
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1><i class="fas fa-user-plus"></i> Register</h1>
+        </div>
+        
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i>
+                Please correct the errors below
+            </div>
+            {% endif %}
+            
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">Username</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-user"></i>
+                    {{ form.username }}
+                </div>
+                {% if form.username.errors %}
+                <div class="error-message">{{ form.username.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Email</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-envelope"></i>
+                    {{ form.email }}
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.password1.id_for_label }}">Password</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    {{ form.password1 }}
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    {{ form.password2 }}
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.bio.id_for_label }}">Bio (Optional)</label>
+                {{ form.bio }}
+            </div>
+            
+            <button type="submit" class="btn btn-primary auth-btn">
+                <i class="fas fa-user-plus"></i> Register
+            </button>
+            
+            <div class="auth-links">
+                <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

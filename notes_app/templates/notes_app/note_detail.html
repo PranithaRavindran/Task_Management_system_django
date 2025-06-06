@@ -1,0 +1,57 @@
+{% extends 'notes_app/base.html' %}
+{% load static %}
+<script src="{% static 'notes_app/js/script.js' %}"></script>
+<link rel="stylesheet" href="{% static 'notes_app/css/styles.css' %}">
+
+
+
+{% block content %}
+<div class="detail-container">
+    <div class="note-detail priority-{{ note.priority }} {% if note.is_completed %}completed{% endif %}">
+        <div class="detail-header">
+            <h1>{{ note.title }}</h1>
+            <div class="note-status">
+                {% if note.is_completed %}
+                    <span class="status-badge completed"><i class="fas fa-check-circle"></i> Completed</span>
+                {% else %}
+                    <span class="status-badge pending"><i class="fas fa-clock"></i> Pending</span>
+                {% endif %}
+                <span class="priority-badge">{{ note.get_priority_display }}</span>
+            </div>
+        </div>
+        
+        <div class="note-content">
+            <p>{{ note.content|linebreaks }}</p>
+        </div>
+        
+        <div class="note-meta">
+            <div class="meta-item">
+                <i class="fas fa-calendar-plus"></i>
+                <span>Created: {{ note.created_at|date:"M d, Y H:i" }}</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-calendar-check"></i>
+                <span>Last updated: {{ note.updated_at|date:"M d, Y H:i" }}</span>
+            </div>
+            {% if note.due_date %}
+            <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>Due: {{ note.due_date|date:"M d, Y H:i" }}</span>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="note-actions">
+            <a href="{% url 'note_update' note.pk %}" class="btn">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            <a href="{% url 'note_delete' note.pk %}" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Delete
+            </a>
+            <a href="{% url 'notes_list' %}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

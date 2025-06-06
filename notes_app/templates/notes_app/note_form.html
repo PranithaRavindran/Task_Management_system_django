@@ -1,0 +1,40 @@
+{% extends 'notes_app/base.html' %}
+{% load static %}
+<script src="{% static 'notes_app/js/script.js' %}"></script>
+<link rel="stylesheet" href="{% static 'notes_app/css/styles.css' %}">
+
+
+{% block content %}
+<div class="note-form-container">
+    <h2>{% if object %}Edit Note{% else %}Create New Note{% endif %}</h2>
+    <form method="post" class="note-form">
+        {% csrf_token %}
+        
+        <label for="id_title">Title:</label>
+        {{ form.title }}
+        
+        <label for="id_content">Content:</label>
+        {{ form.content }}
+        
+        <label for="id_priority">Priority:</label>
+        {{ form.priority }}
+        
+        <label for="id_due_date">Due Date:</label>
+        {{ form.due_date }}
+        
+        <div class="checkbox-group">
+            {{ form.is_completed }}
+            <label for="id_is_completed">Completed</label>
+        </div>
+        
+        <div class="note-form-actions">
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i> Save
+            </button>
+            <a href="{% url 'notes_list' %}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% load static %}
+<!-- Load static files -->
+{% load static %}
+
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'notes_app/css/style.css' %}">
+
+<!-- Font Awesome for icons -->
+ 
+<!-- Load static files -->
+{% load static %}
+
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'notes_app/css/style.css' %}">
+
+<!-- Font Awesome for icons -->
+ <link rel="stylesh<link rel="stylesheet" href="https://URL_ADDRESS.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!-- JavaScript -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <!-- Load static files -->
+    {% load static %}
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'notes_app/css/style.css' %}">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="{% static 'notes_app/css/style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></head>
+<body>
+    <nav>
+        <div class="container">
+            {% if user.is_authenticated %}
+                <span><i class="fas fa-user"></i> Welcome, {{ user.username }}!</span>
+                <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="container">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- JavaScript -->
+    <script src="{% static 'notes_app/js/script.js' %}"></script>
+</body>
+</html>
